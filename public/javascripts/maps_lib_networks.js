@@ -63,6 +63,8 @@ var MapsLib = {
     map.setOptions({styles: styles});
     
     MapsLib.searchrecords = null;
+
+
     
     //reset filters
     $("#search_address").val(MapsLib.convertToPlainString($.address.parameter('address')));
@@ -71,12 +73,23 @@ var MapsLib = {
     else $("#search_radius").val(MapsLib.searchRadius);
     $("#rbType0").attr("checked", "checked");
     $("#result_count").hide();
+    var resetside = document.getElementById('content_window');
+    resetside.innerHTML = "";
+
 
     if ($.address.parameter('view_mode') != undefined)
       MapsLib.setResultsView($.address.parameter('view_mode'));
      
     //run the default search
     MapsLib.doSearch();
+
+
+    //google.maps.event.addListener(MapsLib.searchrecords, 'click', function() {
+    //  map.setZoom(8);
+      //map.setCenter(marker.getPosition());
+    //});
+
+    
   },
   
   doSearch: function(location) {
@@ -130,6 +143,18 @@ var MapsLib = {
     else { //search without geocoding callback
       MapsLib.submitSearch(whereClause, map);
     }
+    google.maps.event.addListener(MapsLib.searchrecords, 'click', function(e) {
+          var text =  "<b>" + e.row['name'].value + "</b> " + e.row['Underutilized'].value + " out of " + e.row['Total Schools'].value + 
+          " schools are underutilized.</br>" + e.row['description'].value;
+     //     {Underutilized} out of {Total Schools} schools are "underutilized." ({Percent Underutilized})<br>
+     //         {description}<br>";
+          showInContentWindow(text);
+        });
+
+        function showInContentWindow(text) {
+          var sidediv = document.getElementById('content_window');
+          sidediv.innerHTML = text;
+        }
   },
   
   submitSearch: function(whereClause, map, location) {
@@ -141,7 +166,8 @@ var MapsLib = {
         where:  whereClause
       },
       styleId: 2,
-      templateId: 2
+      templateId: 2,
+      suppressInfoWindows: true
     });
     MapsLib.searchrecords.setMap(map);
     MapsLib.getCount(whereClause);
