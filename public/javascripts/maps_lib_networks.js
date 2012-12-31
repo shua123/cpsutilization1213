@@ -149,6 +149,16 @@ var MapsLib = {
      //     {Underutilized} out of {Total Schools} schools are "underutilized." ({Percent Underutilized})<br>
      //         {description}<br>";
           showInContentWindow(text);
+
+         MapsLib.searchrecords.set("styles", [{
+            where: '\'UNIQUEID\' = ' + e.row['UNIQUEID'].value,
+            polygonOptions: {
+              fillColor: '#FF0000'
+            }
+          }]);
+
+
+          //MapsLib.searchrecords.set('styleId', 1);
         });
 
         function showInContentWindow(text) {
@@ -165,6 +175,7 @@ var MapsLib = {
         select: MapsLib.locationColumn,
         where:  whereClause
       },
+      
       styleId: 2,
       templateId: 2,
       suppressInfoWindows: true
