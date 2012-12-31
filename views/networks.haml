@@ -1,73 +1,43 @@
 .row-fluid
-  .span2
-    /%h4
-    /  Networks
-      
-    / .well
-    /   %h4
-    /     Address
-    /     <small>(<a id='find_me' href='#'>find me</a>)</small>
-
-    %input#search_address.input-block-level{:placeholder => "Enter an address or an intersection", :type => "text", :style => "display: none;"}
-      
-    /   %label
-    /     within
-    /     %select#search_radius.input-small
-    /       %option{:value => "400"} 2 blocks
-    /       %option{:value => "805"} 1/2 mile
-    /       %option{:value => "1610"} 1 mile
-    /       %option{:value => "3220"} 2 miles
-
-    /   / .pull-right
-    /   /   %button#view_mode.btn.btn-info 
-    /   /     Show list
-      
-    /   %input#search.btn.btn-primary{:type => "button", :value => "Search"}
-    /  %button#reset.btn Reset
-
-    .well
-      / Once you decide what filter you want, place the HTML code here. The section in the maps_lib.js is also marked. Once you're done, feel free to delete this explanatory section.
-      %h4
-        Networks
-      %ul.inputs-list.unstyled
-        %li
+  .span12
+    .span4
+      #map_canvas
+    .span8
+      .span6
+        .well
           %label.radio.inline
-            %input#rbType0{:checked => "", :name => "types", :type => "radio"}/
-            %span.filter-box.filter-blue
-            Elementary School Networks
-        %li
+            %input#rbType0{:checked => "", :name => "types", :type => "radio"}
+              Elementary School Network        
           %label.radio.inline
-            %input#rbType1{:name => "types", :type => "radio"}/
-            %span.filter-box.filter-green
-            High School Networks
+            %input#rbType1{:name => "types", :type => "radio"}
+              High School Network
+
+      .span6
+        /%p.alert.alert-info.lead#result_count
+        .well
+          Click on a network for a list of underutilized schools.
+        /#result_count
+        %input#search_address.input-block-level{:placeholder => "Enter an address or an intersection", :type => "text", :style => "display: none;"}
+      
+      .span11
+        #content_window
+  %span.pull-right
+    Data provided by
+    = succeed "." do
+      %a{:href => "http://ilraiseyourhand.org"} Raise Your Hand
+    Map by
+    = succeed "." do
+      %a{:href => "https://twitter.com/shua123"} Josh Kalov
+    Based on 
+    %a{:href => "http://derekeder.com/searchable_map_template/"} Searchable Map Template
+    by
+    = succeed "." do
+      %a{:href => "http://derekeder.com"} Derek Eder
 
 
 
-    %p.alert.alert-info.lead#result_count
 
 
-  .span3
-    #listCanvas{:style => "display: none;"}
-      #resultsList
-
-    #map_canvas
-
-    %span.pull-right
-      Data provided by
-      = succeed "." do
-        %a{:href => "http://ilraiseyourhand.org"} Raise Your Hand
-      Map by
-      = succeed "." do
-        %a{:href => "https://twitter.com/shua123"} Josh Kalov
-      %a{:href => "http://derekeder.com/searchable_map_template/"} Searchable Map Template
-      by
-      = succeed "." do
-        %a{:href => "http://derekeder.com"} Derek Eder
-
-  .span7
-    %p
-      Click on a network to see underutilized schools.
-    #content_window
 
 - content_for :javascripts do
   = include_javascript :"jquery.address.min"
@@ -81,6 +51,7 @@
         offsetTop = 90; // Calculate the top offset
     
       $('#map_canvas').css('height', (h - offsetTop));
+
     }).resize();
     
     $(function() {

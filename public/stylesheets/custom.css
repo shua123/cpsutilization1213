@@ -4,6 +4,9 @@ a { color: #4B58A6; }
   max-width: none;
 }
 
+#content_window {
+    overflow:auto;
+  }
 
 .filter-box { 
   height: 15px; 

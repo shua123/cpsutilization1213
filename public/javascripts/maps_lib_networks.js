@@ -31,8 +31,8 @@ var MapsLib = {
 
   map_centroid:       new google.maps.LatLng(41.8781136, -87.66677856445312), //center that your map defaults to
   locationScope:      "chicago",      //geographical area appended to all address searches
-  recordName:         "result",       //for showing number of results
-  recordNamePlural:   "results", 
+  recordName:         "network",       //for showing number of results
+  recordNamePlural:   "networks", 
   
   searchRadius:       805,            //in meters ~ 1/2 mile
   defaultZoom:        10,             //zoom level when map is loaded (bigger is more zoomed in)
