@@ -63,7 +63,7 @@
 
       $(':radio').click(function(){
         MapsLib.doSearch();
-        _trackClickEventWithGA("Network Type Selection", "Network Type Click", value);
+        _trackClickEventWithGA("Network Type Selection", "Network Type Click", radio.value);
 
       });
       
