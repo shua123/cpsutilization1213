@@ -47,6 +47,7 @@ var MapsLib = {
       zoom: MapsLib.defaultZoom,
       center: MapsLib.map_centroid,
       mapTypeId: google.maps.MapTypeId.ROADMAP
+
     };
 
     map = new google.maps.Map($("#map_canvas")[0],myOptions);
@@ -144,20 +145,18 @@ var MapsLib = {
       MapsLib.submitSearch(whereClause, map);
     }
     google.maps.event.addListener(MapsLib.searchrecords, 'click', function(e) {
-          var text =  "<b>" + e.row['name'].value + "</b> " + e.row['Underutilized'].value + " out of " + e.row['Total Schools'].value + 
-          " schools are underutilized.</br>" + e.row['description'].value;
-     //     {Underutilized} out of {Total Schools} schools are "underutilized." ({Percent Underutilized})<br>
-     //         {description}<br>";
-          showInContentWindow(text);
-
-         MapsLib.searchrecords.set("styles", [{
+          MapsLib.searchrecords.set("styles", [{
             where: '\'UNIQUEID\' = ' + e.row['UNIQUEID'].value,
             polygonOptions: {
               fillColor: '#FF0000'
             }
           }]);
+          var text =  "<b>" + e.row['name'].value + "</b> " + e.row['Underutilized'].value + " out of " + e.row['Total Schools'].value + 
+          " schools are underutilized.</br>" + e.row['description'].value;
+     //     {Underutilized} out of {Total Schools} schools are "underutilized." ({Percent Underutilized})<br>
+     //         {description}<br>";
 
-
+          showInContentWindow(text);
           //MapsLib.searchrecords.set('styleId', 1);
         });
 
