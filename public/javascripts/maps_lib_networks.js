@@ -151,12 +151,14 @@ var MapsLib = {
               fillColor: '#FF0000'
             }
           }]);
+          var netname = e.row['name'].value;
           var text =  "<b>" + e.row['name'].value + "</b> " + e.row['Underutilized'].value + " out of " + e.row['Total Schools'].value + 
           " schools are underutilized.</br>" + e.row['description'].value;
      //     {Underutilized} out of {Total Schools} schools are "underutilized." ({Percent Underutilized})<br>
      //         {description}<br>";
 
           showInContentWindow(text);
+          _trackClickEventWithGA("Network Selection", "Map Click", netname);
           //MapsLib.searchrecords.set('styleId', 1);
         });
 
